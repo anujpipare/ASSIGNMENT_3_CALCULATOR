@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #9c2828;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(48, 70, 53, 0.2);
+            color: #fff;
+            width: 320px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px; /* Larger font size */
+            font-weight: bold; /* Bold text */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px; /* Larger font size */
+            font-weight: bold; /* Bold text */
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            border: 2px solid #555;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            font-size: 20px; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Space between input fields */
+        }
+
+        button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 20px; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            width: calc(50% - 20px);
+            box-sizing: border-box;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #666;
+        }
+
+        button:active {
+            background-color: #444;
+            transform: translateY(2px);
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .button-container button {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculator</h1>
+
+        <label for="fno">First Number:</label>
+        <input type="text" id="fno" name="fno" required>
+
+        <label for="sno">Second Number:</label>
+        <input type="text" id="sno" name="sno" required>
+
+        <div class="button-container">
+            <button onclick="calculate('add')">+</button>
+            <button onclick="calculate('subtract')">-</button>
+            <button onclick="calculate('multiply')">*</button>
+            <button onclick="calculate('divide')">/</button>
+            <button onclick="clearFields()">CLr</button> <!-- Clear Button -->
+        </div>
+
+        <label for="result">Result:</label>
+        <input type="text" id="result" name="result" readonly value="0">
+    </div>
+
+    <script type="text/javascript">
+        function calculate(operation) {
+            // Retrieve input values
+            var num1 = parseFloat(document.getElementById('fno').value);
+            var num2 = parseFloat(document.getElementById('sno').value);
+            var result;
+
+            // Check if inputs are valid numbers
+            if (isNaN(num1) || isNaN(num2)) {
+                result = 'Error: Invalid input';
+            } else {
+                // Perform calculation based on selected operation
+                switch (operation) {
+                    case 'add':
+                        result = num1 + num2;
+                        break;
+                    case 'subtract':
+                        result = num1 - num2;
+                        break;
+                    case 'multiply':
+                        result = num1 * num2;
+                        break;
+                    case 'divide':
+                        if (num2 !== 0) {
+                            result = num1 / num2;
+                        } else {
+                            result = '';
+                        }
+                        break;
+                    default:
+                        result = 'Invalid operation';
+                }
+            }
+
+            // Display result in the result input box
+            document.getElementById('result').value = result;
+        }
+
+        // Function to clear input and result fields
+        function clearFields() {
+            document.getElementById('fno').value = '';
+            document.getElementById('sno').value = '';
+            document.getElementById('result').value = '0';
+        }
+    </script>
+</body>
+</html>
